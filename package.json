@@ -1,0 +1,20 @@
+{
+  "name": "openai-nodejs-repl",
+  "author": "Christopher Ochsenreither",
+  "version": "1.0.0",
+  "description": "A Nodejs REPL setup for peer programming with ChatGPT",
+  "main": "index.js",
+  "scripts": {
+    "start": "node -i -e \"$(< repl-init.js)\""
+  },
+  "keywords": [],
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@extractus/article-extractor": "^7.3.1",
+    "cheerio": "^1.0.0-rc.12",
+    "dotenv": "^16.3.1",
+    "gpt-tokens": "^1.1.2",
+    "openai": "^3.3.0",
+    "turndown": "^7.1.2"
+  }
+}

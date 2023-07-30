@@ -1,0 +1,13 @@
+.env
+
+# Apple
+.DS_Store
+
+.zip
+
+prompts
+completions
+histories
+scripts
+
+node_modules
