@@ -1,11 +1,10 @@
 {
-  "name": "openai-nodejs-repl",
+  "name": "gpt-my-repl",
   "author": "Christopher Ochsenreither",
-  "version": "1.0.0",
-  "description": "A Nodejs REPL setup for peer programming with ChatGPT",
-  "main": "index.js",
+  "version": "1.1.0",
+  "description": "A Deno REPL setup for peer programming with LLMs",
   "scripts": {
-    "start": "node -i -e \"$(< repl-init.js)\""
+    "start": "deno repl -A --eval-file=repl-init.ts"
   },
   "keywords": [],
   "license": "Apache-2.0",
