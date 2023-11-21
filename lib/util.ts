@@ -1,10 +1,12 @@
+
 import { extractFromHtml } from "@extractus/article-extractor";
 import TurndownService from "turndown";
+import UtilsType from "./types/Utils";
 
 const turndownService = new TurndownService();
 
-const Utils = {
-    help: function (): void {
+const Utils: UtilsType = {
+    help: function () {
         console.log(`Available methods:\n`);
         console.log(`await Chat.complete(<prompt: string | messages: JSON[]>): send prompt/messages for completion.`);
         console.log(`Chat.setModel(<modelname: string>): Set the model for prompt completions.`);
@@ -23,4 +25,60 @@ const Utils = {
         console.log(`await Chat.extractFromHtml(<url: string>): Uses the npm package @extractus/article-extractor to extract text content including quote & code blocks from a web page and creates stripped-down article html`);
         console.log(`await Chat.makeDoc(<url: string>, <type: string> = 'markdown): Fetches the contents of a web page, extracts article (text content) and converts content to the specified type (i.e. markdown, text). Returns article in final format.`);
     },
-}
+    setWorkDir: function (dirPath) {
+        process.chdir(dirPath);
+    },
+    saveFile: function (filePath, data) {
+        let content: string;
+        if (typeof data === 'object') {
+            content = JSON.stringify(data);
+        } else {
+            content = data;
+        }
+        Deno.writeFileSync(filePath, content);
+    },
+    loadFile: function (filePath) {
+        const data = Deno.readFileSync(filePath, 'utf8');
+        return data;
+    },
+    fetch: async function (url) {
+        return new Promise((resolve, reject) => {
+            https.get(url, (response) => {
+                let content = '';
+
+                response.on('data', (chunk) => {
+                    content += chunk;
+                });
+
+                response.on('end', () => {
+                    resolve(content);
+                });
+            }).on('error', (error) => {
+                reject(error);
+            });
+        });
+    },
+    articleFromHtml: async function (html) {
+        const articleHtml = await extractFromHtml(html);
+        return articleHtml;
+    },
+    htmlToMarkdown: function (html) {
+        const markdown = turndownService.turndown(html);
+        return markdown;
+    },
+    makeDoc: async function (url, type = 'markdown') {
+        try {
+            const html = await this.fetch(url);
+            const article = await this.articleFromHtml(html, url);
+            const title = `<h1>${article.title}</h1>`;
+            const description = `<p>${article.description}</p>`;
+            const content = article.content;
+            const newHtml = [title, description, content].join('');
+            return this.htmlToMarkdown(newHtml);
+        } catch (error) {
+            throw Error(error);
+        }
+    },
+};
+
+export default Utils;
