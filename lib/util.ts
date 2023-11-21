@@ -1,7 +1,6 @@
-
 import { extractFromHtml } from "@extractus/article-extractor";
 import TurndownService from "turndown";
-import UtilsType from "./types/Utils";
+import UtilsType from "./types/Utils.ts";
 
 const turndownService = new TurndownService();
 
@@ -25,51 +24,42 @@ const Utils: UtilsType = {
         console.log(`await Chat.extractFromHtml(<url: string>): Uses the npm package @extractus/article-extractor to extract text content including quote & code blocks from a web page and creates stripped-down article html`);
         console.log(`await Chat.makeDoc(<url: string>, <type: string> = 'markdown): Fetches the contents of a web page, extracts article (text content) and converts content to the specified type (i.e. markdown, text). Returns article in final format.`);
     },
-    setWorkDir: function (dirPath) {
-        process.chdir(dirPath);
+    setWorkDir: function (dirPath: string) {
+        Deno.chdir(dirPath);
     },
-    saveFile: function (filePath, data) {
+    saveFile: function (filePath: string, data: object | string) {
         let content: string;
         if (typeof data === 'object') {
             content = JSON.stringify(data);
         } else {
             content = data;
         }
-        Deno.writeFileSync(filePath, content);
+        Deno.writeTextFileSync(filePath, content);
     },
-    loadFile: function (filePath) {
-        const data = Deno.readFileSync(filePath, 'utf8');
-        return data;
+    loadFile: function (filePath: string) {
+        const decoder = new TextDecoder("utf-8");
+        const data = Deno.readFileSync(filePath);
+        return decoder.decode(data);
     },
-    fetch: async function (url) {
-        return new Promise((resolve, reject) => {
-            https.get(url, (response) => {
-                let content = '';
-
-                response.on('data', (chunk) => {
-                    content += chunk;
-                });
-
-                response.on('end', () => {
-                    resolve(content);
-                });
-            }).on('error', (error) => {
-                reject(error);
-            });
-        });
+    fetch: async function (url: string) {
+        const textResponse = await fetch(url);
+        const textData = await textResponse.text();
+        return textData;
     },
-    articleFromHtml: async function (html) {
+    articleFromHtml: async function (html: string) {
         const articleHtml = await extractFromHtml(html);
         return articleHtml;
     },
-    htmlToMarkdown: function (html) {
+    htmlToMarkdown: function (html: string) {
         const markdown = turndownService.turndown(html);
         return markdown;
     },
-    makeDoc: async function (url, type = 'markdown') {
+    makeDoc: async function (url: string): Promise<string | null> {
         try {
             const html = await this.fetch(url);
-            const article = await this.articleFromHtml(html, url);
+            const article = await this.articleFromHtml(html);
+            if (!article) return null;
+
             const title = `<h1>${article.title}</h1>`;
             const description = `<p>${article.description}</p>`;
             const content = article.content;
