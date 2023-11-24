@@ -9,8 +9,10 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 const { Chat } = require('./lib/chat');
+const { Image } = require('./lib/image');
 
 Chat.setDefaultConfig();
+Image.setDefaultConfig();
 
 // var prompt = require('./extra-setup');
 
