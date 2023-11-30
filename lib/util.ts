@@ -1,6 +1,6 @@
 import { extractFromHtml } from "@extractus/article-extractor";
 import TurndownService from "turndown";
-import UtilsType from "./types/Utils.ts";
+import UtilsType from "./types/Utils.d.ts";
 
 const turndownService = new TurndownService();
 
