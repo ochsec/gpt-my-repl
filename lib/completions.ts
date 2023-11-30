@@ -1,5 +1,21 @@
 import { GPTTokens } from 'gpt-tokens';
 import CompletionsType from "./types/Completions.d.ts";
+import { OpenAIApi } from "openai";
+import { saveFile, loadFile } from "./util.ts";
+
+declare let openai: OpenAIApi;
+
+interface ITokenUsageResponse {
+    prompt: number;
+    completion: number;
+    total: number;
+}
+
+interface IMessageItem {
+    name?: string;
+    role: 'system' | 'user' | 'assistant';
+    content: string;
+}
 
 const Completions: CompletionsType = {
     _history: [],
@@ -11,10 +27,10 @@ const Completions: CompletionsType = {
     },
     saveHistory: function (filePath: string) {
         const data = this._history;
-        this.saveFile(filePath, data);
+        saveFile(filePath, data);
     },
     loadHistory: function (filePath: string) {
-        const data = this.loadFile(filePath);
+        const data = loadFile(filePath);
         this._history = JSON.parse(data);
     },
     clearHistory: function () {
@@ -51,7 +67,7 @@ const Completions: CompletionsType = {
             throw new Error(error);
         }
     },
-    tokenUsage: function (messages) {
+    tokenUsage: function (messages: IMessageItem[]): ITokenUsageResponse {
         const model = this.getConfig().model;
         const usageInfo = new GPTTokens({
             model,

@@ -4,6 +4,22 @@ import UtilsType from "./types/Utils.d.ts";
 
 const turndownService = new TurndownService();
 
+export function saveFile (filePath: string, data: object | string) {
+    let content: string;
+    if (typeof data === 'object') {
+        content = JSON.stringify(data);
+    } else {
+        content = data;
+    }
+    Deno.writeTextFileSync(filePath, content);
+}
+
+export function loadFile (filePath: string) {
+    const decoder = new TextDecoder("utf-8");
+    const data = Deno.readFileSync(filePath);
+    return decoder.decode(data);
+}
+
 const Utils: UtilsType = {
     help: function () {
         console.log(`Available methods:\n`);
@@ -27,20 +43,8 @@ const Utils: UtilsType = {
     setWorkDir: function (dirPath: string) {
         Deno.chdir(dirPath);
     },
-    saveFile: function (filePath: string, data: object | string) {
-        let content: string;
-        if (typeof data === 'object') {
-            content = JSON.stringify(data);
-        } else {
-            content = data;
-        }
-        Deno.writeTextFileSync(filePath, content);
-    },
-    loadFile: function (filePath: string) {
-        const decoder = new TextDecoder("utf-8");
-        const data = Deno.readFileSync(filePath);
-        return decoder.decode(data);
-    },
+    saveFile,
+    loadFile,
     fetch: async function (url: string) {
         const textResponse = await fetch(url);
         const textData = await textResponse.text();
