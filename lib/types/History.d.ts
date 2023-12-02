@@ -1,7 +1,9 @@
-export interface IHistoryItem {
-   [name: string]: string; 
-}
+type HistoryType = Array<IMessageItem>;
 
-type HistoryType = Array<IHistoryItem>;
+export interface IMessageItem {
+   name?: string;
+   role: 'system' | 'user' | 'assistant';
+   content: string | undefined;
+}
 
 export default HistoryType;

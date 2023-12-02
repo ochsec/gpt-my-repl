@@ -1,9 +1,9 @@
-import History, { IHistoryItem } from "./History.d.ts";
+import History, { IMessageItem } from "./History.d.ts";
 
 type CompletionsType = {
     _history: History;
     getHistory(): History;
-    getLast(): IHistoryItem;
+    getLast(): IMessageItem;
     saveHistory(filepath: string): void;
     loadHistory(filePath: string): void;
     clearHistory(): void;
