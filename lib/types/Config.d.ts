@@ -2,6 +2,7 @@ export default interface IChatConfig {
     model: string;
     temperature: number;
     top_p: number;
-    frequency_penalrt: number;
+    max_tokens: number;
+    frequency_penalty: number;
     presence_penalty: number;
 }

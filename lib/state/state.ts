@@ -4,6 +4,7 @@ import IChatConfig from "../types/Config.d.ts";
 
 export default class State {
     static #openai: OpenAIApi;
+    static #models: Array<string> = [];
     static #history: HistoryType = [];
     static #memory = 10;
     static #config: IChatConfig;
@@ -14,6 +15,14 @@ export default class State {
 
     static setOpenAIApi(openai: OpenAIApi): void {
         State.#openai = openai;
+    }
+
+    static getModels(): Array<string> {
+        return State.#models;
+    }
+
+    static setModels(models: string[]) {
+        State.#models = models;
     }
 
     static getHistory(): HistoryType {
