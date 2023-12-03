@@ -4,7 +4,7 @@
 
 `npm start` loads an OpenAI API Key and Organization, creates the OpenAI agent and then loads a Chat object that you can use in the REPL to send prompts to ChatGPT and store answers.
 
-Start a Node.js REPL with a Chat object loaded that allows you to:
+Start a Deno REPL with a Chat object loaded that allows you to:
 - Set a configuration 
     - Set a [model](https://platform.openai.com/docs/api-reference/models): `> Chat.setModel(<model>)`
     - Set a temperature: `> Chat.setTemp(0.1)`
@@ -26,7 +26,7 @@ Start a Node.js REPL with a Chat object loaded that allows you to:
 
 ### Prerequisites
 1. An [OpenAI](https://platform.openai.com) API Key and Organization Id
-2. Node.js version 14.0.0 or higher on your device (needs top-level await)
+2. A recent version of Deno
 ### Instructions for Use
 1. Clone this repository
 2. `$ cd gpt-my-repl`
@@ -37,8 +37,6 @@ ORGANIZATION=<your organization id>
 ```
 3. `$ npm install`
 4. `$ npm start`
-
-The repl automatically loads the `fs` and `path` modules, since reading and writing files is a common use-case.
 
 ### Complete list of commands
 
