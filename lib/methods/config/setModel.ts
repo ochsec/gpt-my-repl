@@ -1,7 +1,7 @@
 import State from "../../state/state.ts";
 import validateModel from "./validateModel.ts";
 
-export default function setModel(model: string) {
+export default function setModel(model: string): void {
     if (validateModel(model)) {
         const config = State.getConfig();
         config.model = model;

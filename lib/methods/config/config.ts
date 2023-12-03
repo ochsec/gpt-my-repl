@@ -1,3 +1,4 @@
+import IConfig from "../../types/IConfig.d.ts";
 import getConfig from "./getConfig.ts";
 import getMemory from "./getMemory.ts";
 import getModels from "./getModels.ts";
@@ -9,15 +10,17 @@ import setTemp from "./setTemp.ts";
 import validateModel from "./validateModel.ts";
 import validateTemp from "./validateTemp.ts";
 
-export default class Config {
-    static getConfig = getConfig;
-    static getMemory = getMemory;
-    static getModels = getModels;
-    static setDefaultConfig = setDefaultConfig;
-    static setMaxTokens = setMaxTokens;
-    static setMemory = setMemory;
-    static setModel = setModel;
-    static setTemp = setTemp;
-    static validateModel = validateModel;
-    static validateTemp = validateTemp;
-}
+const Config: IConfig = {
+    getConfig,
+    getMemory,
+    getModels,
+    setDefaultConfig,
+    setMaxTokens,
+    setMemory,
+    setModel,
+    setTemp,
+    validateModel,
+    validateTemp,
+};
+
+export default Config;

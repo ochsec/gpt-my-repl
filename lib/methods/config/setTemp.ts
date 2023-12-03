@@ -1,7 +1,7 @@
 import State from "../../state/state.ts";
 import validateTemp from "./validateTemp.ts";
 
-export default function setTemp(temp: number) {
+export default function setTemp(temp: number): void {
     if (validateTemp(temp)) {
         const config = State.getConfig();
         config.temperature = temp;

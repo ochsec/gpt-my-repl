@@ -7,7 +7,7 @@ async function getOpenAIModels() {
     State.setModels(response.data.data.map((m: Engine) => m.id));
 }
 
-export default async function getModels() {
+export default async function getModels(): Promise<string[]> {
     if (State.getModels().length === 0) {
         try {
             await getOpenAIModels();

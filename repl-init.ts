@@ -1,6 +1,7 @@
 import { load } from "https://deno.land/std@0.206.0/dotenv/mod.ts";
 import { Configuration, OpenAIApi } from "openai";
-// import { Chat } from "./lib/chat";
+import Chat from "./lib/Chat.ts";
+import State from "./lib/state/state.ts";
 await load({export: true});
 
 const configuration = new Configuration({
@@ -9,4 +10,7 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-console.dir(openai);
+State.setOpenAIApi(openai);
+Chat.setDefaultConfig();
+
+console.log('Enter Chat.help() for available Chat methods.');

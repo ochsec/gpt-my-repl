@@ -1,6 +1,6 @@
 import { OpenAIApi } from "openai";
 import HistoryType from "../types/History.d.ts"
-import IChatConfig from "../types/Config.d.ts";
+import IChatConfig from "../types/IChatConfig.d.ts";
 
 export default class State {
     static #openai: OpenAIApi;

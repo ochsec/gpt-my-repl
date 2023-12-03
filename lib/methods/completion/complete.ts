@@ -1,7 +1,7 @@
 import { IMessageItem } from "../../types/History.d.ts";
 import State from "../../state/state.ts";
 
-export default async function complete(input: string) {
+export default async function complete(input: string): Promise<string | undefined> {
     const openai = State.getOpenAIApi();
     const memory = State.getMemory();
     const config = State.getConfig();
