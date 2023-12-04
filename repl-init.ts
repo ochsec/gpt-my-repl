@@ -11,6 +11,7 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 State.setOpenAIApi(openai);
+await Chat.getModels();
 Chat.setDefaultConfig();
 
 console.log('Enter Chat.help() for available Chat methods.');
