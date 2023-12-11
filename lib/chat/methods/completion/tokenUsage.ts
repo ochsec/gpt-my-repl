@@ -1,5 +1,5 @@
 import { GPTTokens, supportModelType } from 'gpt-tokens';
-import { MessageItem, ITokenUsageResponse } from "../../types/TokenUsage.d.ts";
+import { MessageItem, ITokenUsageResponse } from "../../../types/TokenUsage.js";
 import State from "../../state/state.ts";
 
 export default function tokenUsage(messages: MessageItem[]): ITokenUsageResponse {

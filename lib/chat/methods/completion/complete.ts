@@ -1,4 +1,4 @@
-import { IMessageItem } from "../../types/History.d.ts";
+import { IMessageItem } from "../../../types/History.js";
 import State from "../../state/state.ts";
 
 export default async function complete(input: string): Promise<string | undefined> {

@@ -1,4 +1,4 @@
-import IChatConfig from "./IChatConfig.d.ts";
+import IChatConfig from "../../chat/types/IChatConfig.d.ts";
 
 interface IConfig {
     getConfig(): IChatConfig;

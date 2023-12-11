@@ -1,4 +1,4 @@
-import IUtil from "../../types/IUtil.d.ts";
+import IUtil from "../../../types/IUtil.js";
 import articleFromHtml from "./articleFromHtml.ts"
 import fetchTextData from "./fetchTextData.ts";
 import help from "./help.ts";

@@ -1,13 +1,13 @@
 import { OpenAIApi } from "openai";
 import HistoryType from "../types/History.d.ts"
-import IChatConfig from "../types/IChatConfig.d.ts";
+import IChatConfig from "../../chat/types/IChatConfig.d.ts";
 
 export default class State {
     static #openai: OpenAIApi;
     static #models: Array<string> = [];
     static #history: HistoryType = [];
     static #memory = 10;
-    static #config: IChatConfig;
+    static #chatConfig: IChatConfig;
 
     static getOpenAIApi(): OpenAIApi {
         return State.#openai;
@@ -41,11 +41,11 @@ export default class State {
         State.#memory = steps;
     }
 
-    static getConfig(): IChatConfig {
-        return State.#config;
+    static getChatConfig(): IChatConfig {
+        return State.#chatConfig;
     }
 
     static setConfig(config: IChatConfig): void {
-        State.#config = config;
+        State.#chatConfig = config;
     }
 }
