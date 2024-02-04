@@ -16,4 +16,5 @@ export default function help(): void {
     console.log(`await Chat.fetch(<url: string>): Fetch a web page's html.`);
     console.log(`await Chat.extractFromHtml(<url: string>): Uses the npm package @extractus/article-extractor to extract text content including quote & code blocks from a web page and creates stripped-down article html`);
     console.log(`await Chat.makeDoc(<url: string>, <type: string> = 'markdown): Fetches the contents of a web page, extracts article (text content) and converts content to the specified type (i.e. markdown, text). Returns article in final format.`);
+    console.log(`await Chat.concatFiles(<dir: string>, <extensions: Array<string>): Asynchronously reads and concatenates the contents of all files with specified extensions in a given directory and its subdirectories into a single string.`)
 }

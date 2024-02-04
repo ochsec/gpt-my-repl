@@ -71,3 +71,4 @@ ORGANIZATION=<your organization id>
 - `await Chat.extractFromHtml(<html: string>, <url: string>) -> object`: Uses the npm package @extractus/article-extractor to extract content from a web page and creates stripped-down article html (like in Safari's Reader mode). Returns an object with some properties (title, description, content, etc).
 - `Chat.htmlToMarkdown(<html: string>) -> string`: Translates html to markdown and returns the markdown.
 - `await Chat.makeDoc(<url: string>, <type: string> = 'markdown) -> string`: Fetches the contents of a web page, extracts article (text content) and converts content to the specified type (i.e. markdown, text). Returns article in final format.
+- `await Chat.concatFiles(<dir: string>, <extensions: Array<string>) -> Promise<string>`: Asynchronously reads and concatenates the contents of all files with specified extensions in a given directory and its subdirectories into a single string.

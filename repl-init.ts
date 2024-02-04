@@ -14,4 +14,5 @@ State.setOpenAIApi(openai);
 await Chat.getModels();
 Chat.setDefaultConfig();
 
+console.log(`Current working directory: ${Deno.cwd()}`);
 console.log('Enter Chat.help() for available Chat methods.');
